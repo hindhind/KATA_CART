@@ -12,3 +12,6 @@ coverage/
 
 # System files:
 .DS_Store
+
+# at the root of your repo
+.angular/cache/
