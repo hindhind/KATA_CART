@@ -1,0 +1,8 @@
+[
+  {
+    "requestUri": "/api/product",
+    "matchStrict": false,
+    "userData": true,
+    "json": "product.json"
+  }
+]

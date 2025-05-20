@@ -1,0 +1,16 @@
+<div class="add-to-cart">
+    <label for="qty">Quantité :</label>
+    <input
+    #qty
+      id="qty"
+      type="number"
+      min="1"
+      [value]="quantity"
+      (input)="onQuantityChange(qty.value)"
+    />
+    <button class="button_primary" (click)="addToCart()" [disabled]="quantity > productQuantity">Ajouter au panier</button>
+   
+  </div>
+  <div  *ngIf="quantity > productQuantity" class="warnning_message">
+    Cette quantité ({{ quantity }}) n’est pas disponible.
+  </div>

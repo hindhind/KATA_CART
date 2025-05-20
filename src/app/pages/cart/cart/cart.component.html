@@ -1,0 +1,47 @@
+<div class="container">
+
+<h2>Panier</h2>
+<button (click)="goToHome()" class="button_primary"> Acceuil </button>
+<ng-container *ngIf="(displayItems$ | async) as items">
+    <ng-container *ngIf="items.length > 0; else emptyBasket">
+<table class="simple-cart-table">
+    <thead>
+      <tr>
+        <th>Article</th>
+        <th>Qté</th>
+        <th>Prix HT</th>
+        <th>Prix TTC</th>
+        <th>Taxes</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of displayItems$ | async">
+        <td>{{ item.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.unitHT | currency:'EUR':'symbol' }}</td>
+        <td>{{ item.unitTTC | currency:'EUR':'symbol' }}</td>
+        <td>{{ item.tax | currency:'EUR':'symbol' }}</td>
+        <td> <button mat-icon-button
+            color="warn"
+            (click)="remove(item.id)">
+      <mat-icon>delete</mat-icon>
+    </button></td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+<ng-template #emptyBasket>
+    <p class="empty-message">Votre panier est vide.</p>
+  </ng-template>
+</ng-container>
+<div class="totals">
+  <button mat-stroked-button>
+    TOTAL Taxes: {{ totalTaxes$ | async | currency:'EUR':'symbol' }}
+  </button>
+  <button mat-stroked-button>
+    TOTAL TTC:   {{ totalTTC$   | async | currency:'EUR':'symbol' }}
+  </button>
+</div>
+</div>
+

@@ -1,0 +1,45 @@
+{
+  "state": 1,
+  "data": [
+    {
+      "id": 1,
+      "productName": "Livre",
+      "price": 12.49,
+      "quantity": 3,
+      "isImported": false,
+      "category": "Culture"
+    },
+    {
+      "id": 2,
+      "productName": "CD musical",
+      "price": 14.99,
+      "quantity": 1,
+      "isImported": false,
+      "category": "Musique"
+    },
+    {
+      "id": 3,
+      "productName": "Barre de chocolat importée",
+      "price": 0.85,
+      "quantity": 5,
+      "isImported": true,
+      "category": "Alimentaire"
+    },
+    {
+      "id": 4,
+      "productName": "Parfum importé",
+      "price": 47.5,
+      "quantity": 2,
+      "isImported": true,
+      "category": "Beauté"
+    },
+    {
+      "id": 5,
+      "productName": "Boîte de pilules",
+      "price": 9.75,
+      "quantity": 4,
+      "isImported": false,
+      "category": "Santé"
+    }
+  ]
+}

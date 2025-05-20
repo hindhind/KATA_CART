@@ -1,0 +1,14 @@
+# Node dependencies:
+node_modules/
+
+# Angular build output:
+dist/
+out-tsc/
+coverage/
+
+# IDE settings:
+.vscode/
+.idea/
+
+# System files:
+.DS_Store

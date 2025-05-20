@@ -1,0 +1,32 @@
+.add-to-cart {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 10px;
+  }
+  input[type=number] {
+    width: 4rem;
+  }
+  .counter {
+    margin-left: auto;
+    font-weight: bold;
+  }
+
+  .button_primary {
+    background-color: #5352ed;
+    border: 0;
+    border-radius: 21px;
+    padding: 17px;
+    margin-left: 9px;
+    height: 23px;
+    line-height: 0px;
+    color: #fff;
+    &:disabled {
+        background-color: #70a1ff;
+    }
+    }
+
+    .warnning_message {
+       color: #ff4757;
+       padding: 10px;
+    }
