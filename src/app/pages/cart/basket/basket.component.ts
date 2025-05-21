@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
@@ -6,17 +7,24 @@ import { CartService } from 'src/app/core/services/cart.service';
   templateUrl: './basket.component.html',
   styleUrls: ['./basket.component.scss']
 })
-export class BasketComponent implements OnInit {
+export class BasketComponent implements OnInit, OnDestroy{
   count = 0;
+   private destroy$ = new Subject<void>();
   constructor(private cartService: CartService){}
+  
   
   ngOnInit(): void {
     this.displyayNumberOfItems();
   }
   
   displyayNumberOfItems(): void {
-  this.cartService.getCartItems().subscribe(items => {
+  this.cartService.getCartItems().pipe(takeUntil(this.destroy$)).subscribe(items => {
     this.count = items.reduce((sum, i) => sum + i.quantity, 0);
   });
+}
+
+ngOnDestroy(): void {
+  this.destroy$.next();
+  this.destroy$.complete();
 }
 }
