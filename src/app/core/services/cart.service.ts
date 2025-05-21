@@ -1,4 +1,3 @@
-// src/app/core/services/cart.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ProductEntity } from '../entities/product.entity';
@@ -12,7 +11,7 @@ export interface CartItem {
 export class CartService {
   private items: CartItem[] = [];
   private items$ = new BehaviorSubject<CartItem[]>([]);
-
+  private readonly STORAGE_KEY = 'cart_items';
   getCartItems() {
     return this.items$.asObservable();
   }
@@ -26,14 +25,21 @@ export class CartService {
       this.items.push({ product, quantity });
     }
     this.items$.next(this.items);
+    //this.saveAndEmit();
   }
 
   clear() {
     this.items = [];
     this.items$.next(this.items);
+   // this.saveAndEmit();
   }
   removeItem(productId: number) {
     this.items = this.items.filter(i => i.product.id !== productId);
+    this.items$.next(this.items);
+    //this.saveAndEmit();
+  }
+
+  private saveAndEmit() {
     this.items$.next(this.items);
   }
 }

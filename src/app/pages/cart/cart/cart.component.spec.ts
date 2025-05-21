@@ -5,6 +5,7 @@ import { CartItem, CartService } from 'src/app/core/services/cart.service';
 import { ProductUseCase } from 'src/app/core/useCases/product.usecase';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('CartComponent', () => {
   let component: CartComponent;
@@ -18,6 +19,7 @@ describe('CartComponent', () => {
     const rSpy = jasmine.createSpyObj('Router', ['navigate']);
     await TestBed.configureTestingModule({
       declarations: [ CartComponent ],
+      imports: [MatIconModule],
       providers: [
         { provide: CartService, useValue: cartSpy },
         { provide: ProductUseCase, useValue: useCaseSpy },
@@ -64,7 +66,7 @@ describe('CartComponent', () => {
         tax: 2
       });
       expect(items[1]).toEqual({
-        id: 3,
+        id: 2,
         name: 'Prod2',
         quantity: 3,
         unitHT: 20,

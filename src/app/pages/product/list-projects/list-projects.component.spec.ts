@@ -4,7 +4,7 @@ import { ListProjectsComponent } from './list-projects.component';
 import { ProductService } from 'src/app/core/services/product.service';
 import { ProductRepositoryInterface } from 'src/app/core/repository/product.repository.interface';
 import { InMemoryProductRepository } from 'src/app/infrastructure/in-memory-product.repository';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 import { AppModule } from 'src/app/app.module';
 import { CategoryService } from 'src/app/core/services/category.service';
 import { CategoryRepositoryInterface } from 'src/app/core/repository/category.repository.interface';
@@ -12,6 +12,8 @@ import { CategoryUseCase } from 'src/app/core/useCases/category.usecase';
 import { InMemoryCategoryRepository } from 'src/app/infrastructure/in-memory-category.repository';
 import { ProductUseCase } from 'src/app/core/useCases/product.usecase';
 import { of } from 'rxjs';
+import { ProductEntity } from 'src/app/core/entities/product.entity';
+import { AddToCartComponent } from 'src/app/shared/components/add-to-cart/add-to-cart.component';
 
 describe('ListProjectsComponent', () => {
   let component: ListProjectsComponent;
@@ -103,5 +105,15 @@ describe('ListProjectsComponent', () => {
       component.onItemAdded({ quantity: 2 }, {id: 14, productName: "Apple - Fuji", price: 4.37, quantity: 3, isImported: true, category: "Food" });
       expect(component.totalInCart).toBe(5);
     });
+  });
+
+  it('should display “Indisponible” whene quantity = 0', () => {
+    fixture.detectChanges();
+    component.listOfProduct = [{id: 14, productName: "Apple - Fuji", price: 4.37, quantity: 0, isImported: true, category: "Food" }];
+
+    const chip = fixture.nativeElement.querySelector('#disponibility');
+    expect(chip).toBeTruthy();
+    expect(chip.textContent.trim()).toBe('Indisponible');
+
   });
 });

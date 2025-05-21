@@ -26,6 +26,5 @@ onQuantityChange(value: string) {
 
 addToCart() {
   this.itemAdded.emit({ quantity: this.quantity });
-
 }
 }

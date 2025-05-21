@@ -1,6 +1,6 @@
 
 <div class="toolbar">
-    <app-basket [count]="totalInCart"  (click)="goToCart()"
+    <app-basket   (click)="goToCart()"
     style="cursor: pointer;"></app-basket>
   </div>
 <div class="container">
@@ -13,21 +13,17 @@
               <mat-card-title>{{product.productName}}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <p>Category: {{product.category}}</p>
+              <p>Category: {{product.category}}</p>
               <p> Prix: {{product.price | currency:'EUR':'symbol' }}</p>
-             
             </mat-card-content>
             <mat-card-footer class="card-footer">
               <mat-chip-set>
-                <mat-chip *ngIf="product.quantity === 0">Indisponible</mat-chip>
+                <mat-chip id="disponibility" *ngIf="product.quantity === 0">Indisponible</mat-chip>
                 <mat-chip *ngIf="product.quantity > 0">Qte: {{product.quantity}}</mat-chip>
-               <button class="button_primary" mat-mat-stroked-button [disabled]="product.quantity === 0" (click)="dispalyAddQauntity(product.id)"> Ajouter</button>
+               <button class="button_primary" mat-mat-stroked-button [disabled]="product.quantity === 0" (click)="dispalyAddQauntity(product.id)">Ajouter</button>
                <app-add-to-cart
-               *ngIf="selectedProductId === product.id"
-  [quantity]="1"
-  [productQuantity]="product.quantity"
-  (itemAdded)="onItemAdded($event, product)"
-></app-add-to-cart>
+               *ngIf="selectedProductId === product.id" [quantity]="1" [productQuantity]="product.quantity" (itemAdded)="onItemAdded($event, product)">
+              </app-add-to-cart>
               </mat-chip-set>
             </mat-card-footer>
           </mat-card>

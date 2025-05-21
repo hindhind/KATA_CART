@@ -1,23 +1,17 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
+import { Items } from 'src/app/core/entities/items.entity';
 import { CartService } from 'src/app/core/services/cart.service';
 import { ProductUseCase } from 'src/app/core/useCases/product.usecase';
-interface DisplayItem {
-  id: number;
-  name: string;
-  quantity: number;
-  unitHT: number;
-  unitTTC: number;
-  tax: number;
-}
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent {
-  displayItems$!: Observable<DisplayItem[]>;
+  displayItems$!: Observable<Items[]>;
   totalTaxes$!: Observable<number>;
   totalTTC$!: Observable<number>;
   constructor(

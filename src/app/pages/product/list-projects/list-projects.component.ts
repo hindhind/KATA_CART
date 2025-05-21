@@ -22,8 +22,12 @@ export class ListProjectsComponent implements OnInit, OnDestroy {
   addQuantity = false;
   selectedProductId: number | null = null;
   private destroy$ = new Subject<void>();
-  totalInCart = 0;  
-  constructor (private productUseCase: ProductUseCase, private categoryUseCase: CategoryUseCase, private cartService: CartService, private router: Router ) {
+  totalInCart = 0;
+  quantitySelected = 0;
+  constructor (private productUseCase: ProductUseCase,
+    private categoryUseCase: CategoryUseCase,
+    private cartService: CartService,
+    private router: Router ) {
 
   }
 
@@ -34,8 +38,10 @@ export class ListProjectsComponent implements OnInit, OnDestroy {
 
   onItemAdded(event: { quantity: number }, product: ProductEntity) {
     this.totalInCart += event.quantity;
-    this.cartService.addItem(product, event.quantity);
+    product.quantity = product.quantity - event.quantity;
+    this.cartService.addItem(product, event.quantity);   
   }
+
   getProductList(): void {
     this.productUseCase.getAllProduct().pipe(takeUntil(this.destroy$)).subscribe( {
       next: (products: ProductEntity[]) => {
